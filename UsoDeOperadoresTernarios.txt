@@ -1,8 +1,8 @@
-package todocode;
+package Practicas;
 
 import java.util.Scanner;
 
-public class OperadorTernario {
+public class UsoDeOperadoresTernarios {
 
     public static void main(String[] args) {
 
