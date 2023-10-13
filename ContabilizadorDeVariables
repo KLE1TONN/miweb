@@ -1,0 +1,47 @@
+package todocode;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Scanner;
+import java.util.List;
+import java.util.stream.Collectors;
+
+public class NewClass2 {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        Map<Character, Integer> letraFrecuencia = new HashMap<>();
+
+        System.out.println("Ingrese letras (ingrese 'fin' para finalizar):");
+        String entrada;
+
+        while (true) {
+            entrada = scanner.next();
+            if (entrada.equals("fin")) {
+                break;
+            }
+
+            if (entrada.length() == 1) {
+                char letra = entrada.charAt(0);
+                if (Character.isLetter(letra)) {
+                    letra = Character.toLowerCase(letra); // Convertir a minúsculas
+                    letraFrecuencia.put(letra, letraFrecuencia.getOrDefault(letra, 0) + 1);
+                } else {
+                    System.out.println("Entrada no válida. Ingrese una sola letra.");
+                }
+            } else {
+                System.out.println("Entrada no válida. Ingrese una sola letra.");
+            }
+        }
+
+        // Ordenar la contabilidad de letras de mayor a menor
+        List<Map.Entry<Character, Integer>> listaOrdenada = letraFrecuencia.entrySet()
+                .stream()
+                .sorted((entry1, entry2) -> entry2.getValue().compareTo(entry1.getValue()))
+                .collect(Collectors.toList());
+
+        System.out.println("Frecuencia de letras ordenadas de mayor a menor:");
+        for (Map.Entry<Character, Integer> entry : listaOrdenada) {
+            System.out.println(entry.getKey() + ": " + entry.getValue() + " veces");
+        }
+    }
+}
