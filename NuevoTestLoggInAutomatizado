@@ -1,0 +1,44 @@
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
+
+
+public class LoggInAutomationTest {
+    private WebDriver driver;
+    By registerLinkLocator = By.linkText("REGISTER") ;
+    By registerPageLocator = By.xpath("/html/body/div[2]/table/tbody/tr/td[2]/table/tbody/tr[4]/td/table/tbody/tr/td[2]/table/tbody/tr[1]/td/img");
+    By usernameLocator = By.id("email");
+    By passwordLocator = By.name("password") ;
+    By confirmpasswordLocator = By.name("confirmPassword") ;
+    By RegisterBottonLocator = By.name("submit");
+
+    @Before
+    public void SeTuP () throws Exception {
+        System.setProperty("webdriver.chrome.driver", "C:\\chromedriver.exe");
+        ChromeOptions options = new ChromeOptions();
+        options.addArguments("--remote-allow-origins=*");
+        driver = new ChromeDriver(options);
+
+        driver.manage().window().maximize();
+        driver.get("https://demo.guru99.com/test/newtours/");
+    }
+    @Test
+    public void registeruser() throws InterruptedException {
+        driver.findElement(registerLinkLocator).click();
+        Thread.sleep(100);
+        if(driver.findElement(registerPageLocator).isDisplayed()) {
+            driver.findElement(usernameLocator).sendKeys("Kle1ton");
+            driver.findElement(passwordLocator).sendKeys("alojomora");
+            driver.findElement(confirmpasswordLocator).sendKeys("alojomora");
+            driver.findElement(RegisterBottonLocator).click();
+        }
+    }
+    @After
+    public void tearDown() {
+        driver.quit();
+    }
+}
